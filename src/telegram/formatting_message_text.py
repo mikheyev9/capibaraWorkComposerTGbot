@@ -3,6 +3,9 @@ from crud.read_data_db import get_projects_in_db, get_users_in_db
 
 async def formatting_new_task(new_task, tags):
     author = await get_users_in_db(new_task.author)
+    provision = False
+    if new_task.id_projects == '655bed959f10a5e5a81baeb8':
+        provision = True
     if author is None:
         str_author = 'не указан'
     else:
@@ -38,12 +41,16 @@ async def formatting_new_task(new_task, tags):
         message_to_send += f'\nИ {str_user} уже выполнил задачу поставив статус <b>{new_task.status}</b>'
     if tags is not None:
         message_to_send += f'\n{tags}'
-    return message_to_send
+    return message_to_send, provision
 
 
 async def formatting_update_task(old_task, data):
     message_to_send = ''
 
+    provision = False
+    if old_task.id_projects == '655bed959f10a5e5a81baeb8':
+        provision = True
+    
     if old_task.title != data['title']:
         message_to_send += f'У задачи <b>{old_task.title}</b> изменился title на <b>{data["title"]}</b>\n'
     else:
@@ -92,7 +99,7 @@ async def formatting_update_task(old_task, data):
         message_to_send += f'изменился статус с <b>{old_task.status}</b> на <b>{data["status"]}</b>\n'
     else:
         message_to_send += f'со статусом <b>"{old_task.status}"</b>'
-    return message_to_send
+    return message_to_send, provision
 
 
 async def formatting_old_free_sectors_list(old_free_sectors_list):
