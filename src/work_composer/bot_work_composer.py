@@ -6,7 +6,7 @@ from logging_to_project import logger_to_project
 
 
 LOGIN = 'vi3sa@ya.ru'
-PASSWORD = 'Vlad12315914&'
+PASSWORD = '09Area322'
 EPOCH_MINSTAMP = 27924300
 EPOCH_DT = dt.datetime(year=2023, month=2, day=4)
 PACK_SIZE = 3
